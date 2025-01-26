@@ -1,8 +1,8 @@
 /**
  * Write a description of class MatrixList here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Ori Kornflutzzzz
+ * @version Ema Shel KELLER 9/11/2001
  */
 
 public class MatrixList
