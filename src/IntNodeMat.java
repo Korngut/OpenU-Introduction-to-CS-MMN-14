@@ -1,52 +1,114 @@
 /**
- * Write a description of class IntNodeMat here.
+ * Write a description of class MatrixList here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
 
-public class IntNodeMat
+public class MatrixList
 {
-    private int _data;
-    private IntNodeMat _nextRow, _nextCol, _prevRow, _prevCol;
+    IntNodeMat _m00;
 
-    public IntNodeMat(int data)
+    public MatrixList()
     {
-        _data = data;
-        _nextRow = null;
-        _nextCol = null;
-        _prevRow = null;
-        _prevCol = null;
-    } 
-    
-    public IntNodeMat(int data, IntNodeMat nextR, IntNodeMat nextC,
-    IntNodeMat prevR, IntNodeMat prevC)
-    {
-        _data = data;
-        _nextRow = nextR;
-        _nextCol = nextC;
-        _prevRow = prevR;
-        _prevCol = prevC;
+        _m00 = null;
     }
 
-    public int getData() {return _data;}
-    
-    public IntNodeMat getNextRow() {return _nextRow;}
+    public MatrixList(int[][]mat)
+    {
 
-    public IntNodeMat getNextCol() {return _nextCol;}
+    }
 
-    public IntNodeMat getPrevRow() {return _prevRow;}
 
-    public IntNodeMat getPrevCol() {return _prevCol;}  
-    
+    public int getData_i_j(int i, int j) {
+        int colCounter = 0;
+        int rowCounter = 0;
 
-    public void setData(int data) {_data = data;}
-    
-    public void setNextRow(IntNodeMat next) {_nextRow = next;}
+        IntNodeMat currentCol = _m00;
+        while (currentCol != null) {
+            colCounter++;
+            currentCol = currentCol.getNextCol();
+        }
 
-    public void setNextCol(IntNodeMat next) {_nextCol = next;}
+        IntNodeMat currentRow = _m00;
+        while (currentRow != null) {
+            rowCounter++;
+            currentRow = currentRow.getNextRow();
+        }
 
-    public void setPrevRow(IntNodeMat next) {_prevRow = next;}
+        if (i >= rowCounter || j >= colCounter || i < 0 || j < 0) {
+            return Integer.MIN_VALUE;  
+        }
 
-    public void setPrevCol(IntNodeMat next) {_prevCol = next;}
+        IntNodeMat currentNode = _m00;
+
+        for (int row = 0; row < i; row++) {
+            currentNode = currentNode.getNextRow();  
+        }
+
+        for (int col = 0; col < j; col++) {
+            currentNode = currentNode.getNextCol();  
+        }
+
+        return currentNode.getData();
+    }
+
+
+    public void setData_i_j (int data, int i, int j)
+    {
+    }
+
+
+    public String toString() {
+
+        int colCounter = 0;
+        int rowCounter = 0;
+
+        if (_m00 == null) {
+            return "";
+        }
+
+        IntNodeMat currentCol = _m00;
+        while (currentCol != null) {
+            colCounter++;
+            currentCol = currentCol.getNextCol();
+        }
+
+        IntNodeMat currentRow = _m00;
+        while (currentRow != null) {
+            rowCounter++;
+            currentRow = currentRow.getNextRow();
+        }
+
+        String result = "";
+        IntNodeMat currentValue = _m00;
+
+        for (int i = 0; i < rowCounter; i++) {
+            for (int j = 0; j < colCounter; j++) {
+                result += currentValue.getData();
+                if (j < colCounter - 1) {
+                    result += "\t";
+                }
+                currentValue = currentValue.getNextRow();
+            }
+            if (i < rowCounter - 1) {
+                result += "\n";
+            }
+            currentValue = currentValue.getNextRow();
+        }
+
+        return result;
+    }
+
+
+    public int findMax()
+    {
+        return 0;
+    }
+
+    public int howManyX(int x)
+    {
+        return 0;
+    }
+
 }
